@@ -7,15 +7,20 @@
     </head>
     <body>
        
-        <div id="title"></div>
+        <div id="side">
+            <img src="logo_gardi.jpg" />
+            <br>
+            <img src="logo_im.png" />
+        </div>
         <div id="center">
-            <h1 align="center">Feedback form</h1>
-            <hr><br>
+            
             <div id="wraper">
+                <h1 align="center">Feedback form</h1>
+            <hr><br>
                 <form name="myForm" action="index.php" method="POST">
-                    <font color="red">
-                    <!------------------------------------------------------------------->
-                     <?php
+                    <font color="red" size="2">
+   <!------------------------------------------------------------------->
+   <?php
     
     if(!isset($_POST["fname"]) && !isset($_POST["lname"]) && !isset($_POST["enrol"]) && !isset($_POST["college"]) && !isset($_POST["event"]) ){
     }else{
@@ -34,23 +39,28 @@
         $co = $_POST["CO"];
         if($_POST["other"]!=""){$other=$_POST["other"];}
         if($_POST["expect"]!=""){$expect=$_POST["expect"];}
+        
         include 'db_connect.php';
         
         $query = "SELECT * FROM `feed` where `enrol`='$enrol' and `event`='$event'";
-        mysql_real_escape_string($query);
-        echo $query;        
-        echo mysql_num_rows(mysql_query($query));
-        
-        
-        if(FALSE){
-            
-            $insert = "INSERT INTO `feed`(`fname`, `lname`, `enrol`, `college`, `event`, `tm`, `sa`, `co`, `expect`, `other`) VALUES ($fname,$lname,$enrol,$col,$event,$tm,$sa,$co,$expect,$other)";
+        mysqli_real_escape_string($link, $query);
+        $res=mysqli_query($link, $query);
+        if(mysqli_num_rows($res)==1){
+            echo '<font color="#339933">You have already given feedback of this event</font>';
+        }else{
+            $query = "INSERT INTO `feed` (`fname`, `lname`, `enrol`, `college`, `event`, `tm`, `sa`, `co`, `expect`, `other`) VALUES ('$fname', '$lname', '$enrol', '$col', '$event', '$tm', '$sa', '$co', '$expect', '$other')";
+            if(mysqli_query($link, $query)){
+                header("Location: http://localhost/database/thanks.php?name=$fname");
+            }else{
+                echo 'there was an error please try again !';
+            }
         }
+      
         
     }
 }
 ?>
-                    </font>
+                    </font><br>
                     <label>First Name:</label><br>
                     <input type="text" name="fname" size="50" onblur="validateForm('fname')"><br><br>
                     <label>Last Name:</label><br>
@@ -81,7 +91,7 @@
                         <tr>
                             <td>Time Management</td>
                             <td><input type="radio" name="TM" value="4"><input type="hidden" name="TM" value="" checked="true"></td>
-                            <td><input type="radio" name="TM" value="3" ></td>
+                            <td><input type="radio" name="TM" value="3"></td>
                             <td><input type="radio" name="TM" value="2"></td>
                             <td><input type="radio" name="TM" value="1"></td>
                         </tr>
@@ -104,8 +114,8 @@
                     <label>What do you expect from Immaculate<sup>14</sup>?</label><br>
                     <textarea cols="76" rows="4" name="expect"></textarea><br><br>
                     <label>Any other things you want to share with us?</label><br>
-                    <textarea cols="76" rows="4"></textarea><br><br>
-                    <input type="submit" value="Submit" name="other">
+                    <textarea cols="76" rows="4" name="other"></textarea><br><br>
+                    <input type="submit" value="Submit" id="submit">
                 </form>
             </div>
         </div>

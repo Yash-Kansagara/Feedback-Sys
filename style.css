@@ -5,26 +5,72 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+@font-face {
+	font-family: cool_font;
+	src: url('roboto.ttf');
+       
+}
+@font-face {
+	font-family: thin_font;
+	src: url('thin.ttf');
+}
 root { 
     display: block;
 }
 body{
     margin: 0px;
-    font-family: fantasy;
+    font-family: cool_font;
+    
 }
-#title{
-    height: 60px;
-    width: 100%;
-    background: url("title_back.jpg") repeat-x;
+input{
+    background: url("logoes.png") repeat-x;
+    border: none;
+    font-family: cool_font;
+    padding: 2px 0px;
+    font-size: large;
+    
 }
+textarea{
+    border: #cccccc thin groove;
+    resize: none;
+    font-family: cool_font;
+    font-size: large;
+}
+#side{
+    float: left;
+    width: 240px;
+    height: 330px;
+    margin-left: 20px;
+    position: fixed;
+}
+select{
+    font-family: cool_font;
+    border: none;
+    background: #cccccc;
+    font-size: large;
+}
+
 #center{
     width: 800px;
-    margin: 0px auto;
-    border:#3300ff dashed thin;
+    margin-left: 290px;
+    float: left;
+    
 }
 #wraper{
     margin-left: 80px;
+}
+
+#submit{
+    background: #cccccc;
+    
+}
+#submit:hover{
+    background: aqua;
+    
+}
+
+h1{
+    font-family: thin_font;
 }
 td{
     padding: 5px 0px;
