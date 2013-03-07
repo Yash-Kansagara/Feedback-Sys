@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <title></title>
@@ -50,7 +49,7 @@
         }else{
             $query = "INSERT INTO `feed` (`fname`, `lname`, `enrol`, `college`, `event`, `tm`, `sa`, `co`, `expect`, `other`) VALUES ('$fname', '$lname', '$enrol', '$col', '$event', '$tm', '$sa', '$co', '$expect', '$other')";
             if(mysqli_query($link, $query)){
-                header("Location: http://localhost/database/thanks.php?name=$fname");
+                header("Location: http://localhost/Feedback-Sys/thanks.php?name=$fname");
             }else{
                 echo 'there was an error please try again !';
             }
